@@ -183,6 +183,8 @@ def get_pipeline(
         name="ModelApprovalStatus", default_value="PendingManualApproval"
     )
     
+    base_job_name = base_job_prefix
+    
     # PREPROCESS STEP
     
     sklearn_processor = FrameworkProcessor(
