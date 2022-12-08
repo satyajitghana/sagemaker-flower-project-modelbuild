@@ -210,7 +210,7 @@ def get_pipeline(
     
     processing_step_args = sklearn_processor.run(
         code='preprocess.py',
-        source_dir=os.path.join(BASE_DIR, "sagemaker-flower"),
+        source_dir=os.path.join(BASE_DIR, "sagemaker_flower"),
         # dependencies="sagemaker-flower-pipeline/requirements.txt",
         inputs=[
             ProcessingInput(
@@ -246,7 +246,7 @@ def get_pipeline(
     
     pt_estimator = PyTorch(
         base_job_name=f"{base_job_name}/training-flower-pipeline",
-        source_dir=os.path.join(BASE_DIR, "sagemaker-flower"),
+        source_dir=os.path.join(BASE_DIR, "sagemaker_flower"),
         entry_point="train.py",
         sagemaker_session=pipeline_session,
         role=role,
@@ -300,7 +300,7 @@ def get_pipeline(
     
     eval_step_args = pytorch_processor.run(
         code='evaluate.py',
-        source_dir=os.path.join(BASE_DIR, "sagemaker-flower"),
+        source_dir=os.path.join(BASE_DIR, "sagemaker_flower"),
         inputs=[
             ProcessingInput(
                 source=step_train.properties.ModelArtifacts.S3ModelArtifacts,
@@ -341,7 +341,7 @@ def get_pipeline(
     
     model = PyTorchModel(
         entry_point="infer.py",
-        source_dir=os.path.join(BASE_DIR, "sagemaker-flower"),
+        source_dir=os.path.join(BASE_DIR, "sagemaker_flower"),
         sagemaker_session=pipeline_session,
         role=role,
         model_data=step_train.properties.ModelArtifacts.S3ModelArtifacts,
