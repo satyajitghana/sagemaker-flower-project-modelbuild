@@ -38,6 +38,10 @@ setuptools.setup(
     license=about["__license__"],
     packages=setuptools.find_packages(),
     include_package_data=True,
+    package_data= {
+        # all .dat files at any package depth
+        '': ['**/*.txt'],       
+    },
     python_requires=">=3.6",
     install_requires=required_packages,
     extras_require=extras,
